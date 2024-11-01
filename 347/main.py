@@ -1,23 +1,24 @@
-from typing import List
+from typing import Counter, List
 
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        frequentValuesHashmap = {}  # val : no. of times
-        for n in nums:
+        counter = Counter(nums)
+        bucketSortingArray = [0] * (len(nums) + 1)
+        finalAnswer = []
 
-            if n in frequentValuesHashmap:
-                frequentValuesHashmap[n] = frequentValuesHashmap[n] + 1
+        for num, freq in counter.items():
+            if bucketSortingArray[freq] == 0:
+                bucketSortingArray[freq] = [num]
             else:
-                frequentValuesHashmap[n] = 1
+                bucketSortingArray[freq].append(num)
 
-        # print(frequentValuesHashmap)
-        result: List[int] = []
-        for h in frequentValuesHashmap:
-            if frequentValuesHashmap[h] >= k:
-                result.append(h)
-                # print(h)
-        return result
+        for i in range(len(nums), -1, -1):
+            if bucketSortingArray[i] != 0:
+                if len(finalAnswer) != k:
+                    finalAnswer.extend(bucketSortingArray[i])
+
+        return finalAnswer
 
 
 solution = Solution()
