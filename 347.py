@@ -22,10 +22,8 @@ class Solution:
             for val in bucketSortedByFrequencyArray[frequency]:
                 outputArray.append(val)
                 if len(outputArray) == k:
-                    print(frequencyHashmap)
-                    print(bucketSortedByFrequencyArray)
                     return outputArray
 
 
 solution = Solution()
-print(solution.topKFrequent([1, 2], 2))
+print(solution.topKFrequent([1, 1, 1, 2, 2, 3], 2))
